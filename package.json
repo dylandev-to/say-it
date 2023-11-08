@@ -1,0 +1,30 @@
+{
+  "name": "say-it",
+  "version": "1.0.0",
+  "description": "MYDAD's Project.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
+    "install-dependencies": "cd server && npm install && cd ../client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DylanDev92/say-it.git"
+  },
+  "keywords": [
+    "Social",
+    "Media",
+    "Node.js",
+    "Express.js",
+    "MongoDB"
+  ],
+  "author": "Dylan, Yevhen, Aazain, Mohammed, Denis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DylanDev92/say-it/issues"
+  },
+  "homepage": "https://github.com/DylanDev92/say-it#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
