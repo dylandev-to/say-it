@@ -28,7 +28,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to Say-It! our social media web application");
 });
 
-
+// Using the profile route for handing multiple request about profile
+app.use("/profile", require("./routes/profile.server.route"))
 
 // Set the port for the application
 const PORT = process.env.PORT || 5000;
