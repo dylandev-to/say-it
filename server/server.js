@@ -5,7 +5,7 @@ const path = require("path");
 
 // Sets up the environment variables.
 require("dotenv").config({ path: path.join(__dirname, "environment", ".env") });
-console.log(process.env.ENV_DEV);
+console.log("This is *" + process.env.ENV_DEV + "* environment");
 
 // Instantiate an express app.
 const app = express();

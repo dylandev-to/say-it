@@ -65,7 +65,13 @@ UserSchema.methods = {
   },
   makeSalt: function() {
     return Math.round((new Date().valueOf() * Math.random())) + '';
+  },
+  toJSON: function () {
+    const user = this.toObject();
+    delete user.hashed_password;
+    delete user.salt;
+    return user;
   }
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema, "Users");
