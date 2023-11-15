@@ -21,23 +21,25 @@ if (process.env.NODE_ENV === "development") {
   app.use(compression());
 }
 
+// Initializes the database
+require("./environment/database");
 
+
+
+// Routes section:
 
 // Simple route for GET request
 app.get("/", (req, res) => {
   res.send("Welcome to Say-It! our social media web application");
 });
-
-// Routes section: 
-
 // Using the users route for handing multiple request about users
-app.use("/api/users", require("./routes/users.server.route"))
+app.use("/api/users", require("./routes/users.server.route"));
 // Using the auth route for handing the auth requests
-app.use("/auth", require("./routes/auth.server.route"))
+app.use("/auth", require("./routes/auth.server.route"));
 
 // End of routes section
 
-require("./environment/database")
+
 
 // Set the port for the application
 const PORT = process.env.PORT || 5000;
