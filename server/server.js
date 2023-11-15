@@ -5,7 +5,7 @@ const path = require("path");
 
 // Sets up the environment variables.
 require("dotenv").config({ path: path.join(__dirname, "environment", ".env") });
-console.log(process.env.ENV_DEV);
+console.log("This is *" + process.env.ENV_DEV + "* environment");
 
 // Instantiate an express app.
 const app = express();
@@ -28,8 +28,13 @@ app.get("/", (req, res) => {
   res.send("Welcome to Say-It! our social media web application");
 });
 
-// Using the profile route for handing multiple request about profile
-app.use("/profile", require("./routes/profile.server.route"))
+// Using the users route for handing multiple request about users
+app.use("/api/users", require("./routes/users.server.route"))
+
+// Using the auth route for handing the auth requests
+app.use("/auth", require("./routes/auth.server.route"))
+
+require("./environment/database")
 
 // Set the port for the application
 const PORT = process.env.PORT || 5000;
