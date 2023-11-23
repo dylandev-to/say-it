@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from 'react-router-dom';
 
 import "../styles/home.css";
 import handleDownload from "../utils/downloadApp";
@@ -29,6 +30,10 @@ const getRandomPrompt = () => {
 function Home() {
   const [downloaded, setDownloaded] = useState(false);
 
+  const [isApp, setIsApp] = useState(false)
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     if (downloaded) {
         setTimeout(() => {
@@ -36,6 +41,11 @@ function Home() {
         }, 3000);
     }
   }, [downloaded])
+
+  useEffect(() => {
+    setIsApp(searchParams.get("app") === "true");
+  }, [])
+  
   
 
   return (
@@ -76,6 +86,9 @@ function Home() {
         <div className="apps">
           <div
             className="app"
+            style={{
+              display: isApp ? "none" : "flex"
+            }}
             onClick={(_) => {
               handleDownload();
 
