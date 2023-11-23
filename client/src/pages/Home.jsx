@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "../styles/home.css";
+import handleDownload from "../utils/downloadApp";
+import ThanksDownload from "../components/ThanksDownload";
 
 const funnyPrompts = [
   "Even if it's weird",
@@ -25,8 +27,20 @@ const getRandomPrompt = () => {
 };
 
 function Home() {
+  const [downloaded, setDownloaded] = useState(false);
+
+  useEffect(() => {
+    if (downloaded) {
+        setTimeout(() => {
+            setDownloaded(false);
+        }, 3000);
+    }
+  }, [downloaded])
+  
+
   return (
     <div>
+      <ThanksDownload downloaded={downloaded}/>
       <header>
         <h1>SayIt!</h1>
         <div className="header-interact">
@@ -60,7 +74,14 @@ function Home() {
         </div>
         <p>The best app for sharing your thoughts</p>
         <div className="apps">
-          <div className="app">
+          <div
+            className="app"
+            onClick={(_) => {
+              handleDownload();
+
+              setDownloaded(true);
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"

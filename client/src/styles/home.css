@@ -11,11 +11,11 @@ header > .header-interact {
 }
 
 header > .header-interact > button {
-    padding: 8px 15px;
-    background-color: transparent;
-    color: var(--secondary);
-    border: solid 2px var(--secondary);
-    border-radius: 20px;
+  padding: 8px 15px;
+  background-color: transparent;
+  color: var(--secondary);
+  border: solid 2px var(--secondary);
+  border-radius: 20px;
 }
 
 header > * {
@@ -23,117 +23,143 @@ header > * {
 }
 
 header h1 {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 header svg {
-    fill: var(--secondary);
-    width: 20px;
-    cursor: pointer;
+  fill: var(--secondary);
+  width: 20px;
+  cursor: pointer;
 }
 
 .hero {
-    text-align: center;
-    padding: 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  text-align: center;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero * {
-    color: var(--secondary);
+  color: var(--secondary);
 }
 
 .hero > .title {
-    width: 50%;
-    font-size: 34px;
+  width: 50%;
+  font-size: 34px;
 }
 
 .hero > .title > h2 {
-    font-weight: 500;
-    color: var(--light);
+  font-weight: 500;
+  color: var(--light);
 }
 
 .hero > p {
-    font-size: 14px;
-    margin: 2em;
-    color: var(--light);
+  font-size: 14px;
+  margin: 2em;
+  color: var(--light);
 }
 
 .hero .app svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--primary);
+  width: 20px;
+  height: 20px;
+  fill: var(--primary);
 }
 
 .hero .apps {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .hero .app {
-    display: flex;
-    background-color: var(--secondary);
-    border-radius: 20px;
-    padding: 10px 20px;
-    align-items: center;
-    gap: 10px;
-    position: relative;
+  display: flex;
+  background-color: var(--secondary);
+  border-radius: 20px;
+  padding: 10px 20px;
+  align-items: center;
+  gap: 10px;
+  position: relative;
 }
 
 .hero .app > p {
-    color: var(--primary);
-    font-weight: 500;
+  color: var(--primary);
+  font-weight: 500;
 }
 
 .hero .app img {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    right: -10px;
-    top: -20px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: -10px;
+  top: -20px;
 }
 
 body {
-    background-image: url("../../public/resources/background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-position-y: 35px;
-    height: 100vh;
+  background-image: url("../../public/resources/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-position-y: 35px;
+  height: 100vh;
+  position: relative;
+  overflow-y: hidden;
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
 }
 
 .copy {
-    color: var(--secondary);
-    padding: 10px 20px;
-    background-color: var(--third);
-    border-radius: 20px 0px 0px 0px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    display: flex;
-    max-height: 15px;
-    font-size: 12px;
+  color: var(--secondary);
+  padding: 10px 20px;
+  background-color: var(--third);
+  border-radius: 20px 0px 0px 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  max-height: 15px;
+  font-size: 12px;
 }
 
 .slogan {
-    margin-left: 5px;
-    max-width: 0;
-    opacity: 0;
-    transition: all 1s;
-    white-space: nowrap;
+  margin-left: 5px;
+  max-width: 0;
+  opacity: 0;
+  transition: all 1s;
+  white-space: nowrap;
 }
 
 .copy:hover .slogan {
-    max-width: 300px;
-    opacity: 100;
-    transition: all 1s;
-    white-space: nowrap;
+  max-width: 300px;
+  opacity: 100;
+  transition: all 1s;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .hero > .title {
+    width: 80%;
+    font-size: 28px;
+  }
+
+  .hero > .title > h2 {
+    font-weight: 500;
+    color: var(--light);
+  }
+
+  .hero .apps {
+    flex-direction: column;
+  }
+
+  .hero .apps .app > p {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
 }
