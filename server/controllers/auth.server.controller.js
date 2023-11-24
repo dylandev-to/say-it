@@ -15,9 +15,10 @@ exports.userSignIn = asyncHandler(async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     res.cookie("t", token, {
       expire: new Date() + 9999,
-      sameSite: "None",
+      sameSite: "none",
       httpOnly: true,
-      secure: process.env.ENV_DEV === "production",
+      secure: true,
+      path: "/",
     });
     return res.json({
       token,
