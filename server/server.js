@@ -2,6 +2,8 @@ const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
 const path = require("path");
+const cors = require("cors");
+const cookieParser = require("cookie-parser")
 
 // Sets up the environment variables.
 require("dotenv").config({ path: path.join(__dirname, "environment", ".env") });
@@ -10,6 +12,8 @@ console.log("This is *" + process.env.ENV_DEV + "* environment");
 // Instantiate an express app.
 const app = express();
 
+// Use cookie parser for getting the tokens
+app.use(cookieParser())
 // Body parser middleware to parse JSON bodies
 app.use(express.json());
 // Body parser middleware to handle URL encoded data
@@ -20,6 +24,16 @@ if (process.env.NODE_ENV === "development") {
 } else if (process.env.NODE_ENV === "production") {
   app.use(compression());
 }
+
+// Set up CORS
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL, // Replace with the actual URL you want to whitelist
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 204,
+  })
+);
 
 // Initializes the database
 require("./environment/database");

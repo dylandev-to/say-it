@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import "../styles/home.css";
 import handleDownload from "../utils/downloadApp";
 import ThanksDownload from "../components/ThanksDownload";
 
+// Array of funny prompts for encouragement or inspiration
 const funnyPrompts = [
   "Even if it's weird",
   "Dare to be goofy",
@@ -24,37 +25,46 @@ const funnyPrompts = [
   "Express yourself, be funny",
 ];
 
+// Function to get a random funny prompt from the array
 const getRandomPrompt = () => {
+  // Generate a random index within the length of the funnyPrompts array
   const randomIndex = Math.floor(Math.random() * funnyPrompts.length);
+  
+  // Return the funny prompt at the randomly selected index
   return funnyPrompts[randomIndex];
 };
 
 function Home() {
+  // State to track whether download is completed
   const [downloaded, setDownloaded] = useState(false);
 
-  const [isApp, setIsApp] = useState(false)
+  // State to determine if the user is accessing the app version
+  const [isApp, setIsApp] = useState(false);
 
+  // React Router hook to access and parse query parameters from the URL
   const [searchParams] = useSearchParams();
 
+  // React Router hook for programmatic navigation
   const navigate = useNavigate();
 
+  // useEffect to automatically reset the downloaded state after 3 seconds
   useEffect(() => {
     if (downloaded) {
-        setTimeout(() => {
-            setDownloaded(false);
-        }, 3000);
+      // Set a timeout to reset the downloaded state after 3 seconds
+      setTimeout(() => {
+        setDownloaded(false);
+      }, 3000);
     }
-  }, [downloaded])
+  }, [downloaded]);
 
+  // useEffect to set the isApp state based on the "app" query parameter
   useEffect(() => {
     setIsApp(searchParams.get("app") === "true");
-  }, [])
-  
-  
+  }, []);
 
   return (
     <div className="home">
-      <ThanksDownload downloaded={downloaded}/>
+      <ThanksDownload downloaded={downloaded} />
       <header>
         <h1>SayIt!</h1>
         <div className="header-interact">
@@ -91,7 +101,7 @@ function Home() {
           <div
             className="app"
             style={{
-              display: isApp ? "none" : "flex"
+              display: isApp ? "none" : "flex",
             }}
             onClick={(_) => {
               handleDownload();
@@ -111,7 +121,7 @@ function Home() {
             <p>Download Android</p>
           </div>
           <div className="app">
-            <p onClick={() => navigate('/signup')}>Get Started</p>
+            <p onClick={() => navigate("/signup")}>Get Started</p>
             <img src="/resources/star.svg" alt="" />
           </div>
         </div>
