@@ -13,7 +13,12 @@ exports.userSignIn = asyncHandler(async (req, res) => {
       return res.status(401).json({ error: "Email and password don't match." });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    res.cookie("t", token, { expire: new Date() + 9999 });
+    res.cookie("t", token, {
+      expire: new Date() + 9999,
+      sameSite: "None",
+      httpOnly: true,
+      secure: process.env.ENV_DEV === "production",
+    });
     return res.json({
       token,
       user: {
@@ -32,7 +37,6 @@ exports.userSignOut = asyncHandler(async (req, res) => {
   res.clearCookie("t");
   return res.status("200").json({ message: "Signed out successfully" });
 });
-
 
 // Verifies user authentication
 exports.isAuthenticated = asyncHandler(async (req, res) => {
