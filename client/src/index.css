@@ -23,10 +23,17 @@ body {
     background-color: var(--primary);
 }
 
-button, .app {
+button, .app, a {
     cursor: pointer;
 }
 
-button, h1, h2, .app {
+button, h1, h2, .app, a {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
