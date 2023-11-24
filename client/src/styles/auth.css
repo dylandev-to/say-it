@@ -1,0 +1,139 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.signup .form {
+  background-color: var(--secondary);
+  display: flex;
+  width: 70vw;
+  height: 70vh;
+  border-radius: 20px;
+  box-shadow: 0px 0px 50px 0px var(--primary);
+}
+
+.signup .form > div {
+  padding: 4em 4em;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.signup .form > div > h1 {
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.signup .form input {
+  background-color: var(--primary);
+  padding: 1em;
+  border-radius: 15px;
+  color: var(--secondary);
+}
+
+.signup .passwordStrenght {
+  display: flex;
+  padding: 1em 0em;
+  gap: 10px;
+  align-items: center;
+}
+
+.signup .passwordStrenght p {
+  font-size: 14px;
+}
+
+.signup .passwordStrenght .bar {
+  content: "";
+  background-color: var(--light);
+  width: 15%;
+  height: 5px;
+  border-radius: 10px;
+}
+
+.signup button {
+  background-color: var(--primary);
+  width: fit-content;
+  padding: 1em 2em;
+  border-radius: 10px;
+  color: var(--secondary);
+  margin: 0.5em auto;
+}
+
+.signup button.loginButton {
+  margin-top: 1.5em;
+}
+
+.signup .left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em 0em;
+  gap: 10px;
+}
+
+.signup .left img {
+  height: 70%;
+  width: auto;
+}
+
+.signup .left h2 {
+  font-size: 20px;
+}
+
+.signup a {
+  font-size: 14px;
+  padding: 1em;
+  text-align: center;
+}
+
+body .signup {
+  background-image: url("../../public/resources/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-position-y: 35px;
+  height: 100vh;
+  position: relative;
+  overflow-y: hidden;
+}
+
+@media (max-width: 767px) {
+  .signup .form .left {
+    display: none;
+  }
+
+  .signup .form .right {
+    width: 100%;
+    padding: 5em 2em;
+    align-items: center;
+  }
+
+  .signup .form input {
+    width: 90%;
+  }
+
+  .signup .form .passwordStrenght {
+    width: 90%;
+  }
+
+  .signup .form .passwordStrenght p {
+    font-size: 10px;
+    width: 50%;
+  }
+
+  .signup .form button {
+    font-size: 10px;
+  }
+
+  .signup a {
+    font-size: 10px;
+    padding: 1em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+}

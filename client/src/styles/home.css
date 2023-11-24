@@ -1,16 +1,16 @@
-header {
+.home header {
   display: flex;
   justify-content: space-between;
   padding: 1.5em 2.5em;
 }
 
-header > .header-interact {
+.home header > .header-interact {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
-header > .header-interact > button {
+.home header > .header-interact > button {
   padding: 8px 15px;
   background-color: transparent;
   color: var(--secondary);
@@ -18,21 +18,21 @@ header > .header-interact > button {
   border-radius: 20px;
 }
 
-header > * {
+.home header > * {
   color: var(--secondary);
 }
 
-header h1 {
+.home header h1 {
   cursor: pointer;
 }
 
-header svg {
+.home header svg {
   fill: var(--secondary);
   width: 20px;
   cursor: pointer;
 }
 
-.hero {
+.home .hero {
   text-align: center;
   padding: 5%;
   display: flex;
@@ -41,38 +41,38 @@ header svg {
   justify-content: center;
 }
 
-.hero * {
+.home .hero * {
   color: var(--secondary);
 }
 
-.hero > .title {
+.home .hero > .title {
   width: 50%;
   font-size: 34px;
 }
 
-.hero > .title > h2 {
+.home .hero > .title > h2 {
   font-weight: 500;
   color: var(--light);
 }
 
-.hero > p {
+.home .hero > p {
   font-size: 14px;
   margin: 2em;
   color: var(--light);
 }
 
-.hero .app svg {
+.home .hero .app svg {
   width: 20px;
   height: 20px;
   fill: var(--primary);
 }
 
-.hero .apps {
+.home .hero .apps {
   display: flex;
   gap: 20px;
 }
 
-.hero .app {
+.home .hero .app {
   display: flex;
   background-color: var(--secondary);
   border-radius: 20px;
@@ -82,12 +82,12 @@ header svg {
   position: relative;
 }
 
-.hero .app > p {
+.home .hero .app > p {
   color: var(--primary);
   font-weight: 500;
 }
 
-.hero .app img {
+.home .hero .app img {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -95,7 +95,7 @@ header svg {
   top: -20px;
 }
 
-body {
+body .home {
   background-image: url("../../public/resources/background.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -106,14 +106,14 @@ body {
   overflow-y: hidden;
 }
 
-footer {
+.home footer {
   position: absolute;
   bottom: 0;
   right: 0;
   text-align: right;
 }
 
-.copy {
+.home .copy {
   color: var(--secondary);
   padding: 10px 20px;
   background-color: var(--third);
@@ -125,7 +125,7 @@ footer {
   font-size: 12px;
 }
 
-.slogan {
+.home .slogan {
   margin-left: 5px;
   max-width: 0;
   opacity: 0;
@@ -133,7 +133,7 @@ footer {
   white-space: nowrap;
 }
 
-.copy:hover .slogan {
+.home .copy:hover .slogan {
   max-width: 300px;
   opacity: 100;
   transition: all 1s;
@@ -141,21 +141,21 @@ footer {
 }
 
 @media (max-width: 767px) {
-  .hero > .title {
+  .home .hero > .title {
     width: 80%;
     font-size: 28px;
   }
 
-  .hero > .title > h2 {
+  .home .hero > .title > h2 {
     font-weight: 500;
     color: var(--light);
   }
 
-  .hero .apps {
+  .home .hero .apps {
     flex-direction: column;
   }
 
-  .hero .apps .app > p {
+  .home .hero .apps .app > p {
     text-align: center;
     width: 100%;
   }

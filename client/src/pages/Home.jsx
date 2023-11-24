@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import "../styles/home.css";
 import handleDownload from "../utils/downloadApp";
@@ -32,7 +34,9 @@ function Home() {
 
   const [isApp, setIsApp] = useState(false)
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (downloaded) {
@@ -49,12 +53,12 @@ function Home() {
   
 
   return (
-    <div>
+    <div className="home">
       <ThanksDownload downloaded={downloaded}/>
       <header>
         <h1>SayIt!</h1>
         <div className="header-interact">
-          <button>Sign Up</button>
+          <button onClick={() => navigate("/signup")}>Sign Up</button>
           <svg
             fill="#000000"
             viewBox="0 0 16 16"
@@ -107,7 +111,7 @@ function Home() {
             <p>Download Android</p>
           </div>
           <div className="app">
-            <p>Get Started</p>
+            <p onClick={() => navigate('/signup')}>Get Started</p>
             <img src="/resources/star.svg" alt="" />
           </div>
         </div>
