@@ -1,12 +1,48 @@
 .profileNav {
-    width: 40px;
-    height: 40px;
-    background-color: var(--secondary);
-    border-radius: 100%;
-    display: none;
+  width: 40px;
+  height: 40px;
+  background-color: var(--secondary);
+  border-radius: 100px;
+  display: none;
 }
 
 .profileNav img {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.profileInfoNav {
+    background-color: var(--secondary);
+    width: 45%;
+    position: absolute;
+    right: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profileInfoNav .extra {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.profileInfoNav .extra button {
+    background-color: var(--third);
+    width: fit-content;
+    margin: 0 auto;
+    padding: 7px 12px;
+    border-radius: 10px;
+    color: var(--secondary);
+}
+
+@media (max-width: 767px) {
+  .profileNav {
+    display: block;
+  }
 }

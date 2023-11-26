@@ -35,3 +35,8 @@
     padding: 10px 20px;
     border-radius: 10px;
 }
+
+.uploadPost img {
+    object-fit: cover;
+    border-radius: 100px;
+}
