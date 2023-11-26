@@ -9,7 +9,6 @@ import axios from "axios";
 import ProfileEdit from "../components/ProfileEdit";
 
 function Main() {
-
   const onSignOut = async () => {
     try {
       const response = await axios.get(
@@ -45,17 +44,26 @@ function Main() {
 
   return (
     <div className="main">
-      <ProfileEdit profileInfo={profileInfo} editing={editing} setEditing={setEditing} />
+      <ProfileEdit
+        profileInfo={profileInfo}
+        editing={editing}
+        setEditing={setEditing}
+      />
       <header>
         <h1>SayIt!</h1>
         <div className="headerProfile">
-          <ProfileNav />
+          <ProfileNav profileInfo={profileInfo}/>
         </div>
       </header>
       <section className="content">
         <div className="profileInfo">
           <div className="profileHead">
-          <img src={profileInfo?.profilePicture ?? "/resources/profile.svg"} width={100} height={100} alt="" />
+            <img
+              src={profileInfo?.profilePicture ?? "/resources/profile.svg"}
+              width={100}
+              height={100}
+              alt=""
+            />
             <div className="info">
               <h3>{profileInfo?.name}</h3>
               <p>{profileInfo?.pronouns}</p>
@@ -89,14 +97,15 @@ function Main() {
             </svg>
           </div>
           <div className="extra">
-            <p>
-              {profileInfo?.description}
-            </p>
+            <p>{profileInfo?.description}</p>
             <button onClick={() => onSignOut()}>Sign Out</button>
           </div>
         </div>
         <div className="center">
-          <UploadPost />
+          <div className="trendMobile">
+            <TrendingCard />
+          </div>
+          <UploadPost profileInfo={profileInfo} />
           <h2 className="feedTitle">Feed</h2>
           <ul>
             <Post />

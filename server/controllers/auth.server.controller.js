@@ -50,8 +50,6 @@ exports.getUserInfo = asyncHandler(async (req, res) => {
     // Fetch user information based on the user ID
     const user = await User.findById(userId);
 
-    console.log(user.toJSON())
-
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }

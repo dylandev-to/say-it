@@ -44,6 +44,7 @@
     width: 50px;
     object-fit: cover;
     border-radius: 100px;
+    cursor: pointer;
 }
 
 .main .profileHead svg:last-child {
@@ -95,4 +96,42 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.main .trendMobile {
+  display: none;
+}
+
+
+@media (max-width: 767px) {
+  .main .profileInfo{
+    display: none;
+  }
+  
+  .main .trend {
+    display: none;
+  }
+
+  .main .trendMobile {
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .main .center {
+      width: 100%;
+  }
+  
+  .main .center .feedTitle {
+      color: var(--secondary);
+      margin: 20px 0;
+  }
+  
+  .main .center ul {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
 }
