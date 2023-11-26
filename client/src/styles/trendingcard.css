@@ -1,0 +1,17 @@
+.trendingCard {
+  background-color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 5px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.trendingCard > h3 {
+    margin-bottom: 10px;
+}
+
+.trendingCard > p {
+    text-decoration: underline;
+}

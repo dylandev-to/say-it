@@ -12,7 +12,10 @@ router.post('/signin', authController.userSignIn);
 // Get if user is authenticated
 router.get('/isauthenticated', authMiddlewares.requireAuth, authController.isAuthenticated)
 
-// User sign-out (optional)
+// User sign-out
 router.get('/signout', authController.userSignOut);
+
+// User getInfo
+router.get('/info', authMiddlewares.requireAuth, authController.getUserInfo);
 
 module.exports = router;

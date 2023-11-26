@@ -15,7 +15,6 @@ exports.requireAuth = (req, res, next) => {
       req.isAuthenticated = false;
       return next();
     }
-
     req.isAuthenticated = true;
     req.user = { _id: decoded._id };
     next();

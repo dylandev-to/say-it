@@ -1,3 +1,98 @@
 .main h1 {
+  color: var(--secondary);
+}
+
+.main img,
+.main svg {
+  height: 40px;
+  width: 40px;
+}
+
+.main header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5em 2.5em;
+}
+
+.main .content {
+  display: flex;
+  width: 90vw;
+  height: 100vh;
+  justify-content: space-between;
+  margin: auto auto;
+  margin-top: 20px;
+}
+
+.main .profileInfo{
+  background-color: var(--secondary);
+  height: fit-content;
+  width: 20%;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main .profileHead {
+  display: flex;
+  gap: 10px;
+}
+
+.main .profileHead svg:first-child, .main .profileHead img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.main .profileHead svg:last-child {
+    height: 30px;
+    width: 30px;
+    margin: auto 0 auto auto;
+}
+
+.main .profileHead > .info {
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+}
+
+.main .profileInfo .extra {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.main .profileInfo .extra button {
+    background-color: var(--third);
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px 15px;
+    border-radius: 10px;
     color: var(--secondary);
+}
+
+.main .trend {
+    width: 15%;
+}
+
+.main .center {
+    width: 60%;
+    border-radius: 10px;
+    padding: 20px;
+    padding-top: 0;
+    height: fit-content;
+}
+
+.main .center .feedTitle {
+    color: var(--secondary);
+    margin: 20px 0;
+}
+
+.main .center ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

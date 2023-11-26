@@ -1,0 +1,30 @@
+.post {
+    width: auto;
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post .profilePostInfo {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.post .profilePostInfo svg:last-child{
+    margin: auto 0 auto auto;
+    width: 30px;
+    height: 30px;
+}
+
+.post .interactions {
+    height: 30px;
+}
+
+.post .interactions > svg {
+    width: 30px;
+    height: 30px;
+}
