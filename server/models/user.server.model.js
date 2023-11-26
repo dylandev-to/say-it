@@ -21,7 +21,19 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: "Password is required"
     },
-    salt: String
+    salt: String,
+    pronouns: {
+      type: String,
+      trim: true
+    },
+    description: {
+      type: String,
+      trim: true
+    },
+    profilePicture: {
+      type: String,
+      trim: true
+    }
   },
   { timestamps: true }
 );

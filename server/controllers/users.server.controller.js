@@ -44,25 +44,48 @@ exports.fetchUser = asyncHandler(async (req, res) => {
 // Updates a user by ID
 exports.updateUser = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
+    const userId = req.user._id;
+    
+    console.log(req.body)
+
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    if (req.body.password) {
-      user.password = req.body.password;
+
+    const validPronouns = ['he/him', 'she/her', 'they/them'];
+    if (req.body.pronouns && !validPronouns.includes(req.body.pronouns.toLowerCase())) {
+      return res.status(400).json({ error: 'Invalid pronouns' });
     }
+
+    if (req.body.description && req.body.description.length > 200) {
+      return res.status(400).json({ error: 'Description must be less than 100 characters' });
+    }
+
     if (req.body.name) {
       user.name = req.body.name;
     }
-    if (req.body.email) {
-      user.email = req.body.email;
+
+    if (req.body.pronouns) {
+      user.pronouns = req.body.pronouns;
     }
+
+    if (req.body.description) {
+      user.description = req.body.description;
+    }
+
+    if (req.body.profilePicture) {
+      user.profilePicture = req.body.profilePicture;
+    }
+
     await user.save();
+
     res.json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
+
 
 // Deletes a user by ID
 exports.deleteUser = asyncHandler(async (req, res) => {

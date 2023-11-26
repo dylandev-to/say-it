@@ -15,7 +15,7 @@ const app = express();
 // Use cookie parser for getting the tokens
 app.use(cookieParser())
 // Body parser middleware to parse JSON bodies
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 // Body parser middleware to handle URL encoded data
 app.use(express.urlencoded({ extended: true }));
 // HTTP request logger middleware and compression middleware to compress responses
