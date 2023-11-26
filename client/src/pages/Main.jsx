@@ -27,6 +27,8 @@ function Main() {
 
   const [profileInfo, setProfileInfo] = useState(null);
 
+  const [posts, setPosts] = useState(null)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,7 +38,18 @@ function Main() {
         );
         setProfileInfo(response.data.user);
       } catch (error) {
-        console.error("Error logging in:", error.response.data);
+        console.error("Error getting user data:", error.response.data);
+      }
+      
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}${"/api/posts"}`,
+          { withCredentials: true }
+        );
+        setPosts(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error("Error getting the posts:", error.response.data);
       }
     };
     fetchData();
@@ -97,6 +110,7 @@ function Main() {
             </svg>
           </div>
           <div className="extra">
+            <p className="aboutMeP">About me</p>
             <p>{profileInfo?.description}</p>
             <button onClick={() => onSignOut()}>Sign Out</button>
           </div>
@@ -108,11 +122,11 @@ function Main() {
           <UploadPost profileInfo={profileInfo} />
           <h2 className="feedTitle">Feed</h2>
           <ul>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            {
+              posts?.map((post, id) => {
+                return <Post key={id} post={post}/>
+              })
+            }
           </ul>
         </div>
         <div className="trend">
