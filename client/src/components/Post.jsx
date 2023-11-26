@@ -1,45 +1,52 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import "../styles/post.css";
 import StyledHashtag from "./StyledHashtag";
 
-function Post() {
-  const svgProfile = (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-      <g
-        id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      ></g>
-      <g id="SVGRepo_iconCarrier">
-        {" "}
-        <path
-          d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>{" "}
-        <path
-          d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>{" "}
-        <path
-          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>{" "}
-      </g>
-    </svg>
-  );
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import axios from "axios";
+dayjs.extend(relativeTime);
+
+function Post({ post }) {
+  const [liked, setLiked] = useState(false);
+
+  const [likeCount, setLikeCount] = useState(0)
+
+  const [openDetails, setOpenDetails] = useState(false)
+
+  useEffect(() => {
+    setLiked(post.liked);
+
+    setLikeCount(post.likes.length)
+  }, []);
+
+  const likePost = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/api/posts/like/${post._id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+  
+      setLikeCount((liked ? -likeCount : likeCount) + 1)
+
+      setLiked(!liked);
+  
+      console.log("test");
+  
+      if (response.status === 200) {
+        // Handle successful response if needed
+      }
+    } catch (error) {
+      console.error("Error liking/disliking post:", error.response.data);
+    }
+  };
 
   const svgDots = (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={() => setOpenDetails(!openDetails)} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
@@ -87,18 +94,53 @@ function Post() {
     </svg>
   );
 
+  const svgHeartRed = (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        {" "}
+        <path
+          d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+          fill="#ff0000"
+        ></path>{" "}
+      </g>
+    </svg>
+  );
+
   return (
     <li className="post">
       <div className="profilePostInfo">
-        {svgProfile}
+        <img
+          src={post.postOwner?.profilePicture ?? "/resources/profile.svg"}
+          width={100}
+          height={100}
+          alt=""
+        />
         <div className="postInfo">
-          <h3>Dylan</h3>
-          <p>Hace 2 horas</p>
+          <h3>{post.postOwner.name}</h3>
+          <p>{dayjs(post.createdAt).fromNow()}</p>
         </div>
+
+        <ul style={{
+          display: openDetails ? "flex" : "none"
+        }} className="details">
+            <li><button>Test</button></li>
+            <li><button>Test</button></li>
+            <li><button>Test</button></li>
+            <li><button>Test</button></li>
+          </ul>
         {svgDots}
       </div>
-      <StyledHashtag text="HELLO WORLD #code dasddasdasd #codeaaa" />
-      <div className="interactions">{svgHeart}</div>
+      <StyledHashtag text={post.content} />
+      <div className="interactions">
+        <div onClick={() => likePost()} className="heart">{liked ? svgHeartRed : svgHeart}</div>
+        <p>{likeCount}</p>
+      </div>
     </li>
   );
 }

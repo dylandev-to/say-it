@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", require("./routes/users.server.route"));
 // Using the auth route for handing the auth requests
 app.use("/auth", require("./routes/auth.server.route"));
-
+app.use("/api/posts", require("./routes/posts.server.route"))
 // End of routes section
 
 

@@ -15,7 +15,7 @@ function TrendingCard() {
   return (
     <div className="trendingCard">
       <div onClick={toggleTrends} className="top">
-        <h3>Trending</h3>
+        <h3>Trending 🔥</h3>
         {isActive ? downArrow : rightArrow}
       </div>
       <div className={`trends ${isActive ? "active" : ""}`}>
