@@ -17,10 +17,6 @@
   display: none;
 }
 
-.trendingCard > p {
-  text-decoration: underline;
-}
-
 .trendingCard .trends {
   display: flex;
   flex-direction: column;
@@ -35,6 +31,22 @@
 .trendingCard .trends {
   height: auto;
   transition: all 1s;
+}
+
+.trendingCard .trend {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.trendingCard .trend > p {
+  font-size: 10px;
+  width: auto;
+}
+
+.trendingCard .trend > .trendName {
+  font-size: 12px;
+  font-weight: 500;
 }
 
 @media (max-width: 767px) {

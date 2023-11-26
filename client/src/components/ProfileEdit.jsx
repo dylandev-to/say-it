@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import "../styles/profileedit.css";
 import axios from "axios";
 
+// ProfileEdit component allows users to edit their profile information
 const ProfileEdit = (props) => {
+  // State variables for user profile information
   const [name, setName] = useState("");
   const [pronouns, setPronouns] = useState("");
   const [description, setDescription] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
 
+  // Event handlers for input changes
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -32,6 +35,7 @@ const ProfileEdit = (props) => {
     }
   };
 
+  // Function to save the edited profile information
   const onSaveProfile = async () => {
     try {
       const data = {
@@ -60,10 +64,12 @@ const ProfileEdit = (props) => {
     }
   };
 
+  // Function to close the profile editing modal
   const onCloseProfile = () => {
     props.setEditing(false);
   };
 
+  // Set initial values for profile information when editing starts
   useEffect(() => {
     setName(props.profileInfo?.name);
     setPronouns(props.profileInfo?.pronouns);
@@ -71,6 +77,7 @@ const ProfileEdit = (props) => {
     setProfilePicture(props.profileInfo?.profilePicture);
   }, [props.editing]);
 
+  // JSX structure for the ProfileEdit component
   return (
     <div
       style={{
