@@ -108,7 +108,7 @@ function SignUp() {
             <div
               style={{
                 backgroundColor:
-                  userData.password.length > 6
+                  userData.password.length >= 6
                     ? "var(--third)"
                     : "var(--light)",
               }}

@@ -8,19 +8,25 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import axios from "axios";
 dayjs.extend(relativeTime);
 
+// Post component displays a single post with interactions
 function Post({ post }) {
+  // State variables for post interactions
   const [liked, setLiked] = useState(false);
 
-  const [likeCount, setLikeCount] = useState(0)
+  const [likeCount, setLikeCount] = useState(0);
 
-  const [openDetails, setOpenDetails] = useState(false)
+  const [openDetails, setOpenDetails] = useState(false);
 
+  const [detailsProfile, setDetailsProfile] = useState(false);
+
+  // Update state based on post data when component mounts
   useEffect(() => {
     setLiked(post.liked);
 
-    setLikeCount(post.likes.length)
+    setLikeCount(post.likes.length);
   }, []);
 
+  // Function to handle liking or disliking a post
   const likePost = async () => {
     try {
       const response = await axios.post(
@@ -30,23 +36,44 @@ function Post({ post }) {
           withCredentials: true,
         }
       );
-  
-      setLikeCount((liked ? -likeCount : likeCount) + 1)
+
+      // Update like count and like status based on the response
+      setLikeCount((prevLikeCount) => (liked ? prevLikeCount - 1 : prevLikeCount + 1));
 
       setLiked(!liked);
-  
-      console.log("test");
-  
-      if (response.status === 200) {
-        // Handle successful response if needed
-      }
     } catch (error) {
       console.error("Error liking/disliking post:", error.response.data);
     }
   };
 
+  // Function to handle deleting a post
+  const deletePost = async () => {
+    if (post.isOwner) {
+      try {
+        const response = await axios.delete(
+          `${process.env.REACT_APP_SERVER_URL}/api/posts/${post._id}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        // Reload the page after successful deletion
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error deleting post:", error.response.data);
+      }
+    }
+  };
+
   const svgDots = (
-    <svg onClick={() => setOpenDetails(!openDetails)} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      onClick={() => setOpenDetails(!openDetails)}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
@@ -112,10 +139,36 @@ function Post({ post }) {
     </svg>
   );
 
+  // JSX structure for the Post component
   return (
     <li className="post">
       <div className="profilePostInfo">
+        <div
+          style={{
+            display: detailsProfile ? "flex" : "none",
+          }}
+          className="profileInfoNav"
+        >
+          <div className="profileHead">
+            <img
+              src={post.postOwner?.profilePicture ?? "/resources/profile.svg"}
+              width={100}
+              height={100}
+              alt=""
+            />
+            <div className="info">
+              <h3>{post.postOwner?.name}</h3>
+              <p>{post.postOwner?.pronouns}</p>
+            </div>
+          </div>
+          <div className="extra">
+            <p className="aboutMeP">Profile created {dayjs(post.postOwner?.createdAt).fromNow()}</p>
+            <p className="aboutMeP">About me</p>
+            <p>{post.postOwner?.description}</p>
+          </div>
+        </div>
         <img
+          onClick={() => setDetailsProfile(!detailsProfile)}
           src={post.postOwner?.profilePicture ?? "/resources/profile.svg"}
           width={100}
           height={100}
@@ -126,19 +179,31 @@ function Post({ post }) {
           <p>{dayjs(post.createdAt).fromNow()}</p>
         </div>
 
-        <ul style={{
-          display: openDetails ? "flex" : "none"
-        }} className="details">
-            <li><button>Test</button></li>
-            <li><button>Test</button></li>
-            <li><button>Test</button></li>
-            <li><button>Test</button></li>
-          </ul>
+        <ul
+          style={{
+            display: openDetails ? "flex" : "none",
+          }}
+          className="details"
+        >
+          <li>
+            <button>Report</button>
+          </li>
+          <li>
+            <button
+              onClick={() => deletePost()}
+              style={{ color: "red", display: post.isOwner ? "block" : "none" }}
+            >
+              Delete
+            </button>
+          </li>
+        </ul>
         {svgDots}
       </div>
       <StyledHashtag text={post.content} />
       <div className="interactions">
-        <div onClick={() => likePost()} className="heart">{liked ? svgHeartRed : svgHeart}</div>
+        <div onClick={() => likePost()} className="heart">
+          {liked ? svgHeartRed : svgHeart}
+        </div>
         <p>{likeCount}</p>
       </div>
     </li>

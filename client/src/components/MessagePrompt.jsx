@@ -9,6 +9,7 @@ function MessagePrompt(props) {
       }}
       className="messagePrompt"
     >
+      {/* Display the provided error message or a default "Undefined Message" if not provided */}
       <p>{props.errorMessage ?? "Undefined Message"}</p>
     </div>
   );

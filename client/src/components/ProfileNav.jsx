@@ -3,24 +3,28 @@ import "../styles/profilenav.css";
 import axios from "axios";
 import ProfileEdit from "./ProfileEdit";
 
+// ProfileNav component represents the profile for the nav bar
 function ProfileNav(props) {
+  // State variables for managing profile details and editing mode
   const [openDetails, setOpenDetails] = useState(false);
-
   const [editing, setEditing] = useState(false);
+
+  // Function to handle user sign-out
   const onSignOut = async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}${"/auth/signout"}`,
         { withCredentials: true }
       );
-      console.log(response.data);
 
+      // Reload the page after signing out
       window.location.reload();
     } catch (error) {
       console.error("Error logging in:", error.response.data);
     }
   };
 
+  // JSX structure for the ProfileNav component
   return (
     <div className="profileNav">
       <ProfileEdit

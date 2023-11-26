@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import "../styles/uploadpost.css";
 import axios from "axios";
 
+// Define the maximum length for the post message
 const maxLengthMessage = 200;
 
+// UploadPost component
 function UploadPost(props) {
+  // State to manage the post message
   const [message, setMessage] = useState("");
 
+  // Function to submit the post
   const submitPost = async () => {
     try {
+      // Prepare data for the post request
       const data = {
         content: message
       };
 
+      // Send a post request to the server to create a new post
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}${"/api/posts"}`,
         data,
@@ -23,9 +29,10 @@ function UploadPost(props) {
           },
         }
       );
-
+      
+      // If the post is successfully created (status code 201), reload the page
       if (response.status === 201) {
-        // window.location.reload();
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error updating user:", error.response.data);

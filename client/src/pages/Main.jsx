@@ -9,29 +9,35 @@ import axios from "axios";
 import ProfileEdit from "../components/ProfileEdit";
 
 function Main() {
+  // Function to handle user sign out
   const onSignOut = async () => {
     try {
-      const response = await axios.get(
+      await axios.get(
         `${process.env.REACT_APP_SERVER_URL}${"/auth/signout"}`,
         { withCredentials: true }
       );
-      console.log(response.data);
 
+      // Reload the page after sign out
       window.location.reload();
     } catch (error) {
       console.error("Error logging in:", error.response.data);
     }
   };
 
+  // State for profile editing
   const [editing, setEditing] = useState(false);
 
+  // State to store user profile information
   const [profileInfo, setProfileInfo] = useState(null);
 
+  // State to store posts
   const [posts, setPosts] = useState(null)
 
+  // Fetch user data and posts on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch user data
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER_URL}${"/auth/info"}`,
           { withCredentials: true }
@@ -42,11 +48,12 @@ function Main() {
       }
       
       try {
+        // Fetch posts
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER_URL}${"/api/posts"}`,
           { withCredentials: true }
         );
-        setPosts(response.data);
+        setPosts(response.data.reverse());
         console.log(response.data)
       } catch (error) {
         console.error("Error getting the posts:", error.response.data);

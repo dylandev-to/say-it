@@ -10,10 +10,6 @@
 - **Authentication**: Secure login process with JWT for session management.
 - **User Profiles**: View and edit user profiles.
 
-## Demo Video
-
-- 
-
 ## Team
 
 "Say It" was made by **MYDAD**, a web developers group.
