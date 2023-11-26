@@ -53,7 +53,7 @@ const ProfileEdit = (props) => {
       );
 
       if (response.status === 201) {
-        console.log("User updated:", response.data);
+        window.location.reload()
       }
     } catch (error) {
       console.error("Error updating user:", error.response.data);

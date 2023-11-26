@@ -45,8 +45,6 @@ exports.fetchUser = asyncHandler(async (req, res) => {
 exports.updateUser = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
-    
-    console.log(req.body)
 
     const user = await User.findById(userId);
     if (!user) {
@@ -80,7 +78,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 
     await user.save();
 
-    res.json(user);
+    res.status(201).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
