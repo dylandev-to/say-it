@@ -8,6 +8,8 @@ import Post from "../components/Post";
 import axios from "axios";
 import ProfileEdit from "../components/ProfileEdit";
 
+import jsCookie from "js-cookie";
+
 function Main() {
   // Function to handle user sign out
   const onSignOut = async () => {
@@ -17,7 +19,7 @@ function Main() {
         { withCredentials: true }
       );
 
-      // Reload the page after sign out
+      jsCookie.remove("t");
       window.location.reload();
     } catch (error) {
       console.error("Error logging in:", error.response.data);
