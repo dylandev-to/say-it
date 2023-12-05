@@ -23,7 +23,7 @@ exports.userSignIn = asyncHandler(async (req, res) => {
     return res.json({
       token,
       user: {
-        _id: user._id
+        _id: user._id,
       },
     });
   } catch (err) {
@@ -33,7 +33,12 @@ exports.userSignIn = asyncHandler(async (req, res) => {
 
 // Handles user sign-out
 exports.userSignOut = asyncHandler(async (req, res) => {
-  res.clearCookie("t");
+  res.clearCookie("t", {
+    sameSite: "none",
+    httpOnly: true,
+    secure: true,
+    path: "/",
+  });
   return res.status("200").json({ message: "Signed out successfully" });
 });
 
@@ -42,11 +47,10 @@ exports.isAuthenticated = asyncHandler(async (req, res) => {
   res.json({ isAuthenticated: req.isAuthenticated });
 });
 
-
 exports.getUserInfo = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
-    
+
     // Fetch user information based on the user ID
     const user = await User.findById(userId);
 
