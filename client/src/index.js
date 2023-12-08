@@ -51,15 +51,11 @@ const RouteWrapper = ({ element }) => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RouteWrapper element={<Main />} />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/login",
-    element: <LogIn />,
+    element: <RouteWrapper element={<Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<LogIn />} />
+    </Routes>} />,
   },
 ]);
 

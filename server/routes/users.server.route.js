@@ -11,7 +11,7 @@ router.post('/', userController.createUser);
 
 // List all users
 router.get('/', userController.listAllUsers);
- 
+
 // Fetch a single user by ID
 router.get('/:userId', userController.fetchUser);
 
