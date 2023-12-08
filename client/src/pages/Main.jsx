@@ -23,6 +23,10 @@ function Main() {
         if (typeof window !== "undefined") {
           sessionStorage.removeItem('jwt');
           document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       } else {
         console.error('Sign out unsuccessful');
