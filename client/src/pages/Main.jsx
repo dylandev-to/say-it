@@ -12,16 +12,26 @@ function Main() {
   // Function to handle user sign out
   const onSignOut = async () => {
     try {
-      await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}${"/auth/signout"}`,
+      // Await the response from the sign-out API
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/auth/signout`,
         { withCredentials: true }
       );
-
-      window.location.reload();
+  
+      // Check if the sign-out was successful
+      if (response.status === 200) {
+        if (typeof window !== "undefined") {
+          sessionStorage.removeItem('jwt');
+          document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+      } else {
+        console.error('Sign out unsuccessful');
+      }
     } catch (error) {
-      console.error("Error logging in:", error.response.data);
+      console.error("Error logging out:", error.response?.data || error);
     }
   };
+  
 
   // State for profile editing
   const [editing, setEditing] = useState(false);

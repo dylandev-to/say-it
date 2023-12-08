@@ -37,7 +37,6 @@ exports.userSignOut = asyncHandler(async (req, res) => {
     sameSite: "none",
     httpOnly: true,
     secure: true,
-    path: "/",
   });
   return res.status("200").json({ message: "Signed out successfully" });
 });
