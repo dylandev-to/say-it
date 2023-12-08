@@ -27,5 +27,8 @@
   "homepage": "https://github.com/DylanDev92/say-it#readme",
   "dependencies": {
     "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
